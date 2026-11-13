@@ -1,0 +1,573 @@
+# MICRO KART: GRAND PRIX
+## Gameplay Overhaul — Product Requirements Document
+
+**Version:** 2.0  
+**Status:** Proposed  
+**Primary Platform:** Web / Desktop  
+**Future Platforms:** Mobile and Controller  
+**Existing Engine:** React, TypeScript, Three.js, React Three Fiber, React Three Rapier  
+**3D Tools:** Blender  
+**Codebase Analysis:** Graphify  
+**Version Control:** GitHub
+
+---
+
+# 1. Product Vision
+
+Transform Micro Kart from its current playable 3D racing prototype into a polished, competitive arcade racing game.
+
+The main gameplay inspiration is QQ Speed PC (QQ飞车端游) and QQ Speed Mobile (QQ飞车手游).
+
+The most important mechanics to study and adapt are:
+
+1. QQ Speed's drifting system.
+2. Nitro combinations and chaining.
+3. Super Nitro and advanced boost techniques.
+4. Arcade vehicle handling.
+5. Responsive camera and visual feedback.
+
+Micro Kart should retain its own miniature Formula-style racing identity.
+
+The objective is not to recreate QQ Speed. It is to understand why its driving mechanics are satisfying and build an original system that delivers a similar level of mechanical depth.
+
+## Core Design Philosophy
+
+**Easy to start driving. Difficult to master drifting. Extremely rewarding to master nitro combinations.**
+
+A skilled player should be able to gain a meaningful advantage through better drift execution, boost timing, and racing technique.
+
+# 2. Existing Project Preservation
+
+This project is an existing playable application.
+
+All development must begin by understanding its current architecture.
+
+Preserve existing:
+- Race calendar and race flow.
+- Starting grid.
+- Existing tracks.
+- Vehicle systems.
+- Race results and personal-best tracking.
+- Multiplayer functionality.
+- Existing UI and components where practical.
+
+Do not rebuild the application from scratch.
+
+Do not replace the physics engine without a documented technical justification.
+
+# 3. Gameplay Pillar One: Vehicle Handling
+
+The car must feel responsive, grounded, and predictable.
+
+Requirements:
+
+### Acceleration
+- Smooth acceleration.
+- Speed-dependent acceleration behavior.
+- Convincing momentum.
+- Different acceleration responses during normal driving and boosting.
+
+### Steering
+- Responsive steering.
+- Speed-sensitive steering.
+- Smooth steering transitions.
+- Predictable handling at high speeds.
+- Reduced grip when appropriate.
+
+### Traction
+- Distinguish between normal grip and reduced-grip states.
+- Allow the player to control sideways movement.
+- Avoid excessive sliding during ordinary driving.
+- Provide predictable traction recovery.
+
+### Braking
+- Responsive braking.
+- Smooth deceleration.
+- Controlled transitions between braking, turning, and drifting.
+
+The vehicle must not feel like a character sliding around on a frictionless surface.
+
+# 4. Gameplay Pillar Two: QQ Speed-Inspired Drifting
+
+**This is one of the highest-priority systems in the entire project.**
+
+The current drifting implementation must be evaluated and redesigned if necessary.
+
+The objective is to reproduce the satisfying principles of QQ Speed's drifting, not simply add a sideways movement animation.
+
+## 4.1 Drift Initiation
+
+The player should have deliberate control over when a drift begins.
+
+Requirements:
+- Drift input initiates a controlled loss of traction.
+- Vehicle rotation responds to steering direction.
+- The car enters a recognizable drifting state.
+- Drift angle develops smoothly.
+- Vehicle momentum is preserved.
+- The system behaves differently depending on speed and steering input.
+
+A drift should not automatically happen every time the player turns.
+
+## 4.2 Drift Control
+
+The player must be able to influence the car while drifting.
+
+Requirements:
+- Steering influences drift direction.
+- Drift angle is controllable.
+- Vehicle momentum remains meaningful.
+- Traction can gradually recover.
+- Excessive drift angle should have consequences.
+- The player can exit a drift deliberately.
+
+The goal is to make drifting feel like a technique that players learn rather than an uncontrolled slide.
+
+## 4.3 Drift Recovery
+
+Drift recovery is just as important as drift initiation.
+
+Requirements:
+- Smooth return to normal traction.
+- Controlled vehicle alignment.
+- Preservation of forward momentum.
+- Clear transition into a mini boost opportunity where appropriate.
+- No sudden snapping or unnatural rotation.
+
+## 4.4 Drift Techniques
+
+Study QQ Speed PC and Mobile separately.
+
+Document the exact differences in:
+- Drift input requirements.
+- Drift initiation timing.
+- Steering and countersteering behavior.
+- Drift angle.
+- Drift duration.
+- Recovery mechanics.
+- Mini boost generation.
+- Double boost opportunities.
+- Advanced drift techniques.
+
+Build a technique library containing:
+- Basic drift.
+- Drift recovery.
+- Double spray.
+- Advanced drift exits.
+- Drift-to-nitro combinations.
+- Other verified advanced techniques.
+
+The exact implementation must be based on gameplay research and testing rather than assumed mechanics.
+
+## 4.5 Drift Feedback
+
+Every drift should communicate what is happening.
+
+Required:
+- Tire smoke.
+- Skid marks.
+- Wheel steering animation.
+- Tire sound.
+- Vehicle rotation.
+- Camera response.
+- Drift state indicators.
+- Mini boost feedback.
+
+Visual effects must reflect the actual vehicle state.
+
+# 5. Gameplay Pillar Three: Nitro and Super Nitro
+
+**Nitro combination mastery is the defining gameplay feature of Micro Kart.**
+
+The game must support multiple boost combinations rather than a single generic nitro button.
+
+## 5.1 Nitro System
+
+Requirements:
+- Nitro storage or charge system.
+- Nitro activation.
+- Boost duration.
+- Acceleration changes.
+- Nitro consumption.
+- Recharge rules.
+- Clear HUD feedback.
+- Multiplayer synchronization.
+
+The system must distinguish between stored nitro and the different types of boost opportunities generated through driving techniques.
+
+## 5.2 Mini Boost System
+
+Mini boosts should be integrated into the drifting and drift-recovery system.
+
+Requirements:
+- Recognize successful drift exits.
+- Generate mini boost opportunities.
+- Allow the player to activate or chain qualifying boosts.
+- Provide a limited activation window.
+- Display mini boost feedback.
+- Allow multiple boost interactions where the technique permits.
+
+## 5.3 Nitro Combo Recognition
+
+Create a dedicated combo recognition system.
+
+It should recognize:
+- Action sequence.
+- Input timing.
+- Drift state.
+- Available nitro.
+- Mini boost availability.
+- Combo expiration.
+- Successful execution.
+- Invalid or interrupted combinations.
+
+Research and implement verified techniques such as:
+
+- CW
+- CWW
+- WCW
+- WCWW
+- Double spray
+- Advanced nitro combinations
+- Other verified QQ Speed techniques
+
+Do not assume the notation or exact behavior is identical between PC and Mobile.
+
+Maintain separate reference documentation for each game version.
+
+## 5.4 Super Nitro
+
+Investigate the actual Super Nitro mechanics in QQ Speed PC and Mobile.
+
+Document:
+- How Super Nitro is generated.
+- Required input sequences.
+- Timing requirements.
+- Whether it extends, replaces, or transforms an existing boost.
+- How it differs from ordinary nitro.
+- Its relationship with drifting and mini boosts.
+
+Implement Super Nitro as a distinct boost state if the research confirms that distinction.
+
+## 5.5 Combo Architecture
+
+Create a reusable combo recognition engine.
+
+Suggested components:
+
+- ComboManager
+- ComboDefinitions
+- BoostStateManager
+- NitroManager
+- MiniBoostManager
+- DriftManager
+
+The engine must support:
+- Input buffering.
+- Timing windows.
+- Sequence recognition.
+- Overlapping sequence detection.
+- Combo priority.
+- Combo cancellation.
+- Combo expiration.
+- Boost chaining.
+- Multiplayer validation.
+
+Avoid hardcoding individual combos into the vehicle controller.
+
+## 5.6 Combo Progression
+
+Players should have an opportunity to master increasingly complex techniques.
+
+Suggested levels:
+
+**Beginner**
+- Basic drift.
+- Basic mini boost.
+- CW.
+
+**Intermediate**
+- Double spray.
+- CWW.
+- WCW.
+
+**Advanced**
+- WCWW.
+- Advanced drift exits.
+- Consecutive boost combinations.
+
+**Expert**
+- Complex chained techniques.
+- Precise boost timing.
+- Track-specific combinations.
+
+This is a proposed learning structure, not a definitive QQ Speed ranking.
+
+# 6. Camera and Game Feel
+
+The camera must make the vehicle feel fast and responsive.
+
+Requirements:
+- Dynamic third-person chase camera.
+- Speed-sensitive field of view.
+- Smooth camera follow.
+- Cornering response.
+- Drift-responsive camera rotation.
+- Nitro camera effects.
+- Subtle camera shake.
+- Adjustable camera sensitivity.
+
+Avoid excessive camera movement that reduces visibility.
+
+# 7. Vehicle Visuals and Blender Pipeline
+
+Retain Micro Kart's miniature Formula identity.
+
+Improve:
+- Vehicle proportions.
+- Wheel geometry.
+- Tire models.
+- Front and rear wings.
+- Cockpit.
+- Materials.
+- Paint quality.
+- Lighting.
+- Reflections.
+- Steering animations.
+- Suspension animations.
+
+## Blender Integration
+
+Establish a consistent workflow:
+
+1. Create or edit assets in Blender.
+2. Export optimized GLB/GLTF files.
+3. Import assets into the Three.js project.
+4. Apply materials and animations.
+5. Validate performance and scale.
+6. Test assets in the actual racing environment.
+
+Separate visual models from the physics representation.
+
+The physics body should not rely on unnecessarily complicated render geometry.
+
+# 8. Track Design
+
+Tracks should reward skilled drifting and nitro execution.
+
+Requirements:
+- Different corner types.
+- Clear racing lines.
+- Consistent collision boundaries.
+- Proper track surfaces.
+- Elevation changes where appropriate.
+- Trackside scenery.
+- Starting and finishing lines.
+
+Future additions:
+- Ramps.
+- Shortcuts.
+- Boost pads.
+- Track-specific challenges.
+- More complex corner sequences.
+
+Track layouts should provide opportunities to practice different techniques.
+
+# 9. Audio and Visual Effects
+
+Audio must react to the player's driving.
+
+Required:
+- Engine audio responsive to speed.
+- Engine pitch changes.
+- Tire friction.
+- Drift audio.
+- Mini boost audio.
+- Nitro activation.
+- Super Nitro audio.
+- Collision feedback.
+- Race countdown and finish.
+
+Visual effects:
+- Drift smoke.
+- Skid marks.
+- Nitro exhaust.
+- Speed effects.
+- Boost animations.
+- Wheel and suspension movement.
+- Environmental effects.
+
+Effects must correspond to actual gameplay events.
+
+# 10. User Interface
+
+Required HUD:
+- Speedometer.
+- Nitro meter.
+- Mini boost indicator.
+- Drift indicator.
+- Combo recognition display.
+- Race position.
+- Lap counter.
+- Race timer.
+- Checkpoint progress.
+
+Combo feedback should be clear without blocking the player's view.
+
+Examples:
+- MINI BOOST
+- CW
+- CWW
+- WCW
+- SUPER NITRO
+
+# 11. Multiplayer
+
+The existing multiplayer architecture must be preserved and evaluated.
+
+Requirements:
+- Existing player-count target of 2–8 players.
+- Consistent vehicle behavior.
+- Synchronized drift states.
+- Synchronized nitro activation.
+- Consistent race starts.
+- Race progress synchronization.
+- Collision handling.
+- Latency handling.
+- Server-side validation of important competitive actions.
+
+Physics and combo timing must remain consistent across players.
+
+# 12. Telemetry and Testing
+
+Introduce development telemetry to make gameplay tuning measurable.
+
+Record:
+- Vehicle speed.
+- Acceleration.
+- Steering input.
+- Drift angle.
+- Drift duration.
+- Traction.
+- Nitro activation.
+- Mini boost activation.
+- Combo success and failure.
+- Lap time.
+- Frame rate.
+
+Create a developer testing environment that makes it possible to repeatedly test the same corner and compare results.
+
+Acceptance tests must cover:
+- Normal driving.
+- Drift initiation.
+- Drift recovery.
+- Mini boost generation.
+- Nitro activation.
+- Combo recognition.
+- Combo expiration.
+- Multiplayer synchronization.
+
+# 13. Development Roadmap
+
+## Phase 0: Research and Existing Project Audit
+- Inspect existing codebase.
+- Analyze Graphify output.
+- Map current vehicle and physics systems.
+- Inspect multiplayer architecture.
+- Research QQ Speed PC and Mobile independently.
+- Document drift and nitro techniques.
+- Identify missing systems.
+
+**Deliverable:** Technical architecture report and verified mechanics reference.
+
+## Phase 1: Vehicle Handling
+- Improve acceleration.
+- Improve steering.
+- Improve traction.
+- Improve momentum.
+- Improve braking.
+
+**Deliverable:** A responsive and predictable vehicle controller.
+
+## Phase 2: Drifting Overhaul
+- Rework drift initiation.
+- Implement controlled sideways movement.
+- Implement drift recovery.
+- Implement mini boost opportunities.
+- Add drift feedback.
+
+**Deliverable:** A satisfying and skill-based drifting system.
+
+## Phase 3: Nitro Combo Engine
+- Implement stored nitro.
+- Implement mini boosts.
+- Implement combo recognition.
+- Implement basic and advanced combinations.
+- Implement Super Nitro.
+- Add combo feedback.
+
+**Deliverable:** A complete, expandable nitro technique system.
+
+## Phase 4: Game Feel
+- Upgrade camera.
+- Improve car visuals.
+- Add animations.
+- Add sound design.
+- Add visual effects.
+
+**Deliverable:** A cohesive and polished driving experience.
+
+## Phase 5: Multiplayer Validation
+- Validate vehicle synchronization.
+- Validate drift synchronization.
+- Validate boost synchronization.
+- Test latency and collisions.
+
+**Deliverable:** Competitive multiplayer gameplay.
+
+## Phase 6: Expansion
+- Additional vehicles.
+- Additional tracks.
+- Training mode.
+- Cosmetic customization.
+- Controller support.
+- Mobile controls.
+- Progression systems.
+
+# 14. First Playable Milestone
+
+The first milestone must contain:
+
+- One vehicle.
+- One existing track.
+- Improved vehicle handling.
+- QQ Speed-inspired drifting.
+- Drift recovery.
+- Mini boosts.
+- Basic nitro combinations.
+- Super Nitro.
+- Responsive chase camera.
+
+The milestone is successful when a player can repeatedly execute a drift, recover, chain boosts, and feel a meaningful difference between beginner and advanced driving.
+
+# 15. Non-Goals
+
+- Rebuilding the application.
+- Replacing the current engine without justification.
+- Copying proprietary QQ Speed code, assets, maps, or branding.
+- Adding large quantities of content before the driving system is ready.
+- Sacrificing multiplayer stability.
+- Hardcoding combo logic into the vehicle controller.
+- Optimizing visual effects at the expense of gameplay performance.
+
+# 16. Definition of Success
+
+Micro Kart should reward players who understand how to control their car.
+
+A beginner should be able to finish a race.
+
+An intermediate player should be able to drift through corners and use nitro effectively.
+
+An advanced player should be able to chain complex techniques, execute Super Nitro combinations, and achieve faster lap times through skill.
+
+**The ultimate goal: make drifting and nitro mastery the reason people want to keep playing Micro Kart.**
