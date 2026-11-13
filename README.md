@@ -91,9 +91,15 @@ player accounts and a server-side wallet, with rewards and unlocks granted by th
 ## Deploying
 
 The server is a single Node process holding rooms in memory, so it needs a host that keeps one long-lived
-process and supports WebSockets (Fly.io, Railway, Render, a VPS). Build, then run `npm start`. Serverless
-platforms that spin functions up per request will not hold the rooms. To scale past one process you would
-route each room code to the instance that owns it.
+process and supports WebSockets. The repository includes `render.yaml` for Render:
+
+1. Create a new Render Blueprint and select this repository.
+2. Deploy the `microkart` web service defined by the blueprint.
+3. Open the generated `https://...onrender.com` URL and share it with players.
+
+The service builds with `npm ci && npm run build` and starts with `npm start`. Serverless platforms that spin
+functions up per request will not hold the rooms. To scale past one process you would route each room code to
+the instance that owns it.
 
 ## Credits
 
