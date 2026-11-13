@@ -1,0 +1,33 @@
+{
+  "name": "micro-kart-grand-prix",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Micro Kart Grand Prix: a multiplayer toy-kart racer for the browser.",
+  "scripts": {
+    "dev": "concurrently -k -n server,web -c magenta,cyan \"node --watch server/index.js\" \"vite\"",
+    "build": "vite build",
+    "start": "NODE_ENV=production node server/index.js",
+    "check": "node scripts/check-tracks.js && node scripts/sim-race.js"
+  },
+  "engines": {
+    "node": ">=20.19"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.8.2",
+    "@react-three/postprocessing": "^3.2.2",
+    "@react-three/rapier": "^2.2.0",
+    "pixelfx": "github:patch-gg/pixelfx#044e12a45dc9cc312cec50ee606dfc98afe5adc2",
+    "postprocessing": "^6.39.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "three": "^0.187.0",
+    "ws": "^8.22.2",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.3.0",
+    "concurrently": "^9.2.5",
+    "vite": "^8.3.8"
+  }
+}
